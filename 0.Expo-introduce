@@ -1,0 +1,54 @@
+Expo는 모드것이 자동으로 셋업되어 있는 것이다.
+수동으로 하는 방법도 있다 react native CLI이다.
+
+장점✨
+1.너의 휴대폰에서 앱을 테스트 할 수 있다. 복잡한 절차들을 대신해준다.
+2.Windows환경에서도 ios 앱을 만들 수 있다.
+단점❌
+native files를 크게 관여할 수 없다는 것이다. 한계가 있다.
+
+App.json에 보면 무엇을 지원하는지 나와있다.
+
+🟢expo 애플리케이션 시작하기
+1.npm start하기
+자동으로 export DEV tools를 open해준다.
+QR코드가 존재할 것이다 why? 안드로이드 폰이 QR 코드를 스캔한다.
+그럼 내가 작업한 것을 안드로이드휴대폰에서 볼 수 있다.
+
+live reloading, hot reloading 
+
+live reloading은 자동으로 변경사항이 screen에 반영되는것
+hot reloading은 수동으로 변경사향을 reload해주는것
+ctrl + D 를 누르면 개발자화면이 뜰것이다.
+다양한것들이 있다.
+
+Remote Debug는 앱을 느리게만든다 그래서 필요한 경우에만 사용할 것이다.
+어떻게 돌아가는지를 볼경우에만 사용한다.
+내가 expo에 의존하지 안고 작업을 하려면 expo eject를 해줘야한다.
+
+ios와 안드로이드에서 React는 어떻게 작용할까?
+🟢모바일앱을 만드는 3가지 방법
+
+1.완전 native: Swift or objective-c로 [iOS앱, X Code] 을 만드는것, Java or 코틀린 가지고 만드는 것[안드로이드, android studio] 
+2.앱 기반 Web view를 만드는 것 [하이브리드, 웹뷰 방식] : 정말 간단한, 매우매우 심플한 앱을 만들 때 Cordova or PhoneGap을 통해 html을 넣는것 앱안에서 작동하는 웹사이트 같은 것 native쪽에 자원이 별로 없을때 사용한다.
+  이미 휼륭한 웹사이트가 있을때 그것을 native안에 집어 넣는것이다.
+3.안드로이드,ios모두 자바스크립트 엔진을 가지고 있기 때문에 react-native는 자바스크립트를 이용해서 ios,android엔진에게 메세지를 보낸다. 연결을 이어주는 브릿지 같은 것
+
+  import StyleSheet, Text, View 같은 것들이 브릿지이다.
+  component는 JavaScript이고 그 안에 브릿지가있다. 단점은 항상 브릿지가 필요하다는것이다. 느린 성능을 유발할 수도 있다. 많은데이터가 브릿지를 통해 가기 떄문
+  3D 게임의 경우에는 React Native가 적합하지 않을 것이다.
+  폰과 React 사이에는 모든것이 view이다 view는 <div>같은 것이라고 생각하면 편하고 안에 모든것을 집어넣어야한다.
+  그런 룰이 존재하는 이유는 브릿지 때문이다. 
+
+  CSS 처럼 보이는 const styles 가 있을 것이다. 이 부분을 통해서 css코드를 사용할 수 있다. 다만 JavaScript Code이기 때문에 backgroundColor 이렇게 해줘야한다.
+  가끔 expo에서 error가 발생할 때가 있다. connection이 리셋이 된거다. 
+  expo를 kill하고 다시 실행하면 될것이다. 그럼에도 안된다면 서버를 리셋하고나서 다시 실행해본다.
+
+  css APi부분에 color:'white'를 하게 되면 먹히지 않을 것이다. fontsize또한 마찬가지이다.
+  이것은 text가 아니라 브릿지이기 때문이다.👌
+  text에 스타일을 적용하고 싶다면? <Text style={styles.text}></Text> 해준다음
+  container 부분밑에 text: {
+      color: 'white',
+      width: "100px" (x 폰트는 불가능이다) "100%" (이것은 가능하다)
+  }
+  하면 바뀔것이다.
