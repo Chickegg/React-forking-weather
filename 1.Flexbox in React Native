@@ -1,0 +1,42 @@
+React Native 모든 flex box는 flexDirection이 column이다. 왜냐면 모바일은 대부분 아래로 향하기 때문이다.
+
+flex: 1 은 모든공간이 사용가능하다는 뜻이다.
+그런데 만일 View가 2개이다? 그리고 각각의 flex는 1 과 2이다?
+그런 전체공간이 3이라고 생각하고 각각의 flex만큼의 비율을 화면에서 자치할 것이다.
+
+React Native로 인해서 width나 heigth를 할 필요가 없다. 즉 휴대폰을 기준으로 한다면 React Native가 좋다.
+
+1.App.js 는 만들어놓은 각각의 js파일들을 불러들여 화면에 출력시키는 부분이고
+2.Loading.js는 Loading화면을 만드는 부분?
+
+        paddingHorizontal: 30,
+        paddingVertical: 100,
+        이 부분은 css에서는 없고 React Native에만 있는 것이다.
+
+expo 에서는 location을 지원하는데 immport * as Location from "expo-location"; 하면된다.
+
+class 를 이용해서
+안에 getLocation이라는 함수를 만들텐데 이때 앞서 했던 거서럼 async() 비동기함수로 지정해준다
+그런다음 componentDidMount 에서 this.getLocation함수를 실행해준다.
+
+export default class extends React.Component {
+  getLocation = async() => {
+    const location = await Location.getCurrentPositionAsync();
+    console.log(location);
+  }
+  componentDidMount() {
+    this.getLocation();
+  }
+  render() {
+    return <Loading />;
+  }
+}
+
+이렇게 하게 되면 Location permission is required to do tis operation 즉 우리가 사용자에게
+permission을 요청해야한다고 나올 것이다.
+
+1-3 권한요청❗
+[try , catch]
+
+
+
