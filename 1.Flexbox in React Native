@@ -38,5 +38,28 @@ permission을 요청해야한다고 나올 것이다.
 1-3 권한요청❗
 [try , catch]
 
+만일 try 부분에서 error가 발생하면 catch부분에서 실행될 것이다.
+권한설정을 해주면 object를 받아오는데 ES6를 통해서 안의 위치정보를 가져올 것이다.
 
+try { 
+  await Location.requestBackgroundPermissionsAsync(); 권한이 요청이 되어있는 지 봑인하는 부분
+  const { coords } = await Location.getCurrentPositionAsync(); // 위치와 관련된 object를 가져오는 부분
+  console.log(coords.latitude, coords.longitube);
+} catch (error) { // error가 발생됬다면?
+  Alert.alert("Can't find you.", "So sad);
+}
 
+1-4 날씨정보얻기💥
+사용할 API는 OpenWeather의 API이다.
+우선아이디를 생성하고 로그인을 한다.
+API key를 받아서 const API_KEY = 6ee770953ea44ffedf8cf74c360c2b88 라고해준다.
+
+Current Weather Data에 들어가서 By geographic coordinates부분이 우리가 할 수 있는 부분이다. 지리적 좌표를 통해서❗
+Axios를 통해서  API로부터 받아온 정보들을 state로 저장해줄것이다.
+
+1.getLocation 부분에서 위치정보권한설정을 허용했는지 확인을 하고 
+2.허용이 되어있다면 현재위치에 관한 정보들중에서 latitude와 longitude를 가져와서 변수로 설정해준다
+3.가져온 latitude와 longitube를 입력변수로 받는 getWeather함수를 실행해준다.
+4.미리 만들어 놓은getWeather() 함수로 들어와 axios를 통해서 url주소로 받는 json file의 정보들(현재위치의 날씨정보)을 data라는 object변수로 가져온다.
+
+2번 document에서는 이정보들을 우리가 눈에 볼수있게 하는 작업을 할것이다.

@@ -1,8 +1,10 @@
 import React from "react";
-import { StyleSheet, Text , View } from "react-native";
+import { StyleSheet, Text , View ,LogBox } from "react-native";
 
 
 export default function Loading() {
+    LogBox.ignoreLogs(['Remote debugger']);
+    
     return (
     <View style={styles.container}>
         <Text style={styles.text}>Getting the funcking weather</Text>
