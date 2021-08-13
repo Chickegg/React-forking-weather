@@ -1,0 +1,55 @@
+날씨정보들을 스타일링해서 화면에 render해줄 것이다.
+온도들은 API를 통해서 가지고 왔고 아이콘이 필요하다.
+온도에는 imperial,metric이 있다.
+
+object들의 name을 잘 기억하자 왜 그런가? 
+이 name에 따라 스타일링을 나눠줄 것이기 때문이다.
+
+🟢현재까지 작업 순서
+
+1.비동기 함수 [getWeather, getLocation]를 실행하기 위한 componentDidMount 함수 호출
+2.비동기 함수 [getWeather, getLocation] 실행한다 
+    2-1 getLocation (위치정보 권한 이 허용되어 있는 지 확인하고 그 위치에 대한 data중 위도와 경도를 입력번수로 getWeather 함수를 실행하는 부분)
+    2-2 getWeather(주어진 위도와 경도를 통해서 openweathermap의 API로 부터 날씨 data를 받아와서 state의 상태를 변경하고 추가시켜주는 함수)
+3.주어진 정보들을 종합해서 스크린에 표시하는 render() 함수
+    3-1. 저장되어진 state object의 isLoading, temp를 가지고 온다.
+    3-2. 이를 통해서 삼항 연산자를 통해서 Loading되는 동안 <Loading /> component를 실행하고 로딩이 완료과 되어 isLoading이 false로 변하게 된다면❓
+    3-3 <Weather /> component를 호출하는데 이때 temp(온도)를 Math.round()를 통해서 반올림하여 재지정해준다.
+
+🟢 조건이름 가져오기
+    우리는 위도와 경도를 통해 현재 날씨에 관한 정보를 얻는 getWeather()에서 현재 날씨의 이름(비가오면 rain 등)을 가져올 것이다.
+    그러기 위해서 const { data } 부분을 ES6문법을 통해 기존의 코드를 바꿔줄 것이다.
+        const { data:
+        { main:
+            { temp }, weather}
+                } // data object 자식의 main의 자식의 temp와 weather 를 받아온다. 이 때 둘은 object이다.
+        this.setState({
+            condition:weather[0].main // 받아온 condition object의 0번 index에 위치한 object의 main으로 변수지정.
+        });
+    지정한 state를 render() component부분에서 사용하는 부분
+        render() {
+            const { isLoading, temp, condition } = this.state; // state안에 저장되어진 3가지를 가져온다.
+            return isLoading ? ( // ture일 경우
+                <Loading />  // Loading하는 component 실행
+            ) : ( // Loading이 완료됬을 경우
+                <Weather temp={Math.round(temp)} condition={condition} />  // Weather component를 실행하고 입력변수로 temp,condition을 지정해준다.
+            );
+        }
+    이렇게 해준다면 현재 날씨조건의 이름을 사용할 수 있다.
+    
+🟢 아이콘 및 스타일링
+    Weather.js
+        우리가 React Native를 사용하기 위해 사용하고있는 expo에는 다양한 icons를 제공한다.
+        그 icons를 사용하기 위해서 들여쓰기 해주는 부분
+            import { MaterialCommunityIcons } from "@expo/vector-icons"; 
+            // MaterialCommunityIcons은 많은 아이콘중에 정해진 그룹만 가져오는 부분이며 필요에 따라 변경 가능하다
+
+        이것을 JSX에서 사용하기 위해서는 View,Text와 같이 <MaterialCommunityIcons> 해주면된다.
+        size, name 을 통해서 크기와 가져올 아이콘의 name을 지정해 주는 부분
+            <MaterialCommunityIcons size={96} name={"weather-rainy} />
+        
+        우리는 container를 2부분으로 나눌 것이다.
+            아이콘과 temp(온도)가 있는 부분
+            그에 따른 text가 있는 부분
+
+        
