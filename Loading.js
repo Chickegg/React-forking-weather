@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text , View ,LogBox } from "react-native";
+import { StyleSheet, Text , View ,LogBox, StatusBar } from "react-native";
 
 
 export default function Loading() {
@@ -7,6 +7,7 @@ export default function Loading() {
     
     return (
     <View style={styles.container}>
+        <StatusBar barStyle="dark-conent"/>
         <Text style={styles.text}>Getting the funcking weather</Text>
     </View>
     );

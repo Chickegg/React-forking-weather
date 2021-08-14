@@ -52,4 +52,36 @@ object들의 name을 잘 기억하자 왜 그런가?
             아이콘과 temp(온도)가 있는 부분
             그에 따른 text가 있는 부분
 
-        
+🟢 배경 그라데이션, 제목 및 자막
+
+    -condition에 따른 data를 설정해주는 부분
+        const weatherOptions = {
+            Rain: {
+                iconName: "weather-rainy,
+                gradient: ["#7DE2FC", "#B9B6E5"],
+                title: "비",
+                subtitle: "주륵주륵 비가옵니다."
+            }
+        },
+        ...
+
+    -그라데이션 배경을 사용하기 위해 작업을 해주는 부분
+        1.터미널에 입력하는 부분
+            expo install expo-linear-gradient
+        2.그라데이션 컴포넌트를 들여쓰기 해주는 부분
+            import { LinearGradient } from 'expo-linear-gradient
+        3.이것을 JSX에 추가시켜주는 법
+            <View> 처럼 배경안에 넣을 내용들을 감싸주면 된다.
+                <LinearGradient colors={weatherOptions[condition].gradient} steyle={styles.container}> 
+                // 넣을 내용들 
+                </LinearGradient>
+            즉 이부분이 최상위의 container이자 그라데이션 배경의 역활까지 하는 부분이 된다.
+    
+    -제목 및 자막을 설정해주는 부분
+        <View style={}>
+            <Text style={}>{ weatherOptions[condition].title }</Text>
+            // 저장해놓은 weatherOptions에서 입력변수 condition object안의 title이라는 요소를 가져옵니다.
+            <Text style={}>{ weatherOptions[condition].subtitle }</Text>
+        </View>
+    
+    🎈이때 styles 변수안에 object를 만들어서 component안에 집어넣으면 된다.
